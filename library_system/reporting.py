@@ -26,7 +26,7 @@ def generate_library_summary(books: List[Dict[str, Any]]) -> Dict[str, Any]:
     borrowed = sum(1 for b in books if b.get("is_available", False) is False)
 
     total_years = sum(book.get("year", 0) for book in books)
-    avg_year = float(total_years / total) if total > 0 else 0.0
+    avg_year = int(total_years / total) if total > 0 else 0
 
     all_genres = set()
     for book in books:
