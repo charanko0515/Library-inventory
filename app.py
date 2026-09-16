@@ -99,6 +99,26 @@ with tab_browse:
     # 3. Convert the list of dicts to a pandas DataFrame:
     #    df = pd.DataFrame(...)
     #    st.dataframe(df, use_container_width=True, hide_index=True)
+    col1,col2 = st.columns([1,2])
+    with col1:
+        selected_box = st.selectbox("Filter by genre", ["All Genres", "Fiction", "Action", "Python"])
+
+    with col2:
+        search_query = st.text_input("Search by Author or Title")
+
+    filtered_books = books
+    if selected_box != "All Genres":
+        filtered_books = find_books_by_genre(filtered_books, selected_box)
+    if search_query:
+        digited_text=[]
+        for book in filtered_books:
+            if search_query.lower(  ) in book["title"].lower() or search_query.lower() in book["author"].lower():
+                digited_text.append(book)
+
+        filtered_books = digited_text
+
+    df = pd.DataFrame(filtered_books)
+    st.dataframe(df, use_container_width=True, hide_index=True)
 
     st.info("👉 Complete TODO 2 in app.py to display the searchable book catalog.")
 
