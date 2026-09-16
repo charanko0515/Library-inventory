@@ -66,8 +66,13 @@ st.caption("Day 3 Lab: Pure Python Web Frontend with Streamlit")
 # m1.metric("Total Books", summary.get("total_books", 0))
 # ...
 
-st.info("👉 Complete TODO 1 in app.py to render library status metrics cards here.")
-
+# complete st.info("👉 Complete TODO 1 in app.py to render library status metrics cards here.")
+summary = generate_library_summary(books)
+m1, m2, m3, m4 = st.columns(4)
+m1.metric("Total Books", summary.get("total_books",0))
+m2.metric("Available on Shelf", summary.get("available_books",0))
+m3.metric("Currently Borrowed", summary.get("borrowed_books",0))
+m4.metric("Average Release Year", summary.get("average_year",0))
 st.divider()
 
 # -------------------------------------------------------------------
